@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en" class="il">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>Parcelway – Faster delivery, lower fares</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--e:cubic-bezier(.16,1,.3,1);--mu:#6e6e73;--ln:#d2d2d7;--off:#f5f5f7;--ac:#0a7d3e;--fc:#0a7d3e;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.dk{--mu:rgba(255,255,255,.6);--ln:rgba(255,255,255,.14);--ac:#3ddc84;--fc:#3ddc84;background:#000;color:#fff}
+html{background:#000;scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font:15px/1.6 'Geist','Inter',system-ui,-apple-system,'Segoe UI',sans-serif;background:#fff;color:#1d1d1f;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:rgba(0,0,0,.78);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);z-index:40}
+[hidden]{display:none!important}
+h1,h2,h3,p{margin:0}
+h1,h2{font-weight:300;letter-spacing:-.035em;line-height:1.04}
+:focus-visible{outline:2px solid var(--fc);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.mute{color:var(--mu)}.small{font-size:12px}
+nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:30;color:#fff;border-bottom:1px solid transparent;transition:background .5s var(--e),border-color .5s,transform .7s var(--e)}
+nav.sc{background:rgba(0,0,0,.72);-webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);border-bottom-color:rgba(255,255,255,.1)}
+nav.hd{transform:translateY(-101%)}
+body.mo nav{background:#000;transform:none;border-bottom-color:rgba(255,255,255,.1)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:24px}
+.logo{display:flex;align-items:center;gap:11px;font-weight:600;font-size:18px;letter-spacing:-.03em;color:#fff;text-decoration:none}
+.nl{display:none;gap:34px;font-size:13px}
+.nl a{position:relative;color:rgba(255,255,255,.68);text-decoration:none;padding:6px 0;transition:color .3s}
+.nl a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:#fff;transform:scaleX(0);transform-origin:0 50%;transition:transform .6s var(--e)}
+.nl a:hover,.nl a.cur{color:#fff}
+.nl a:hover::after,.nl a.cur::after{transform:scaleX(1)}
+.nr{display:flex;align-items:center;gap:8px}
+.nb{padding:9px 18px;border-radius:99px;background:#fff;color:#000;font-size:13px;font-weight:500;text-decoration:none;transition:background .3s}
+.nb:hover{background:#d8d8dc}
+.nb .lg{display:none}
+.mb{position:relative;width:40px;height:40px;border:0;background:none;padding:0;cursor:pointer}
+.mb i{position:absolute;left:11px;right:11px;height:1.5px;background:#fff;transition:transform .6s var(--e)}
+.mb i:first-child{top:16px}.mb i:last-child{top:23px}
+body.mo .mb i:first-child{transform:translateY(3.75px) rotate(45deg)}
+body.mo .mb i:last-child{transform:translateY(-3.75px) rotate(-45deg)}
+.mn{position:fixed;inset:0;z-index:25;background:#000;padding:calc(env(safe-area-inset-top,0px) + 64px + 24px) 24px calc(32px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;overflow:auto;visibility:hidden;opacity:0;transition:opacity .5s var(--e),visibility 0s .5s}
+body.mo .mn{visibility:visible;opacity:1;transition:opacity .5s var(--e)}
+.mn a{display:block;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.12);color:#fff;text-decoration:none;font-size:30px;font-weight:300;letter-spacing:-.03em;opacity:0;transform:translateY(18px);transition:opacity .7s var(--e),transform .7s var(--e)}
+body.mo .mn a{opacity:1;transform:none;transition-delay:calc(.07s*var(--i))}
+.mn small{margin-top:auto;padding-top:32px;color:rgba(255,255,255,.5);font-size:12px}
+.hero{position:relative;overflow:hidden;min-height:100svh;display:flex;align-items:center;padding:calc(64px + 64px) 0 96px}
+.land{position:absolute;left:0;right:0;bottom:0;width:100%;height:62%;pointer-events:none}
+.rd{stroke-dasharray:1;stroke-dashoffset:1;animation:dr 4s var(--e) .5s forwards}
+@keyframes dr{to{stroke-dashoffset:0}}
+.hg{position:relative;z-index:1;display:grid;gap:48px;width:100%}
+.hero h1{font-size:clamp(34px,9vw,64px)}
+.lead{margin-top:20px;max-width:34ch;color:var(--mu);font-size:15px}
+.lk{display:inline-block;margin-top:26px;color:rgba(255,255,255,.9);text-decoration:none;font-size:14px}
+.lk::after{content:" ›";transition:margin .3s}.lk:hover::after{margin-left:4px}
+.ld{opacity:0;transform:translateY(18px);animation:up 1.3s var(--e) var(--d,0s) forwards}
+@keyframes up{to{opacity:1;transform:none}}
+.card{position:relative;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:22px;-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);color-scheme:dark}
+.row{display:flex;align-items:center;gap:14px;height:64px;padding:0 18px;border-bottom:1px solid rgba(255,255,255,.1)}
+.row:last-child{border:0}
+.ic{width:20px;height:20px;flex:none;color:rgba(255,255,255,.7)}
+.row>div:not(.chips){flex:1;min-width:0}
+.row label{display:block;font-size:12px;color:rgba(255,255,255,.55);line-height:1.2}
+.row select,.row input{appearance:none;-webkit-appearance:none;border:0;background:none;padding:0;margin:0;font:500 17px/1.3 'Geist',system-ui,sans-serif;color:#fff;width:100%;min-height:24px;text-align:left;border-radius:0}
+option{color:#111;background:#fff}
+input::-webkit-date-and-time-value{text-align:left}
+.sw{position:absolute;right:18px;top:45px;z-index:2;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:#111;color:#fff;font-size:16px;cursor:pointer;transition:background .3s}
+.sw:hover{background:#222}
+.chips{display:flex;gap:6px;flex:none}
+.chips button{font:500 12px 'Geist',sans-serif;border:1px solid rgba(255,255,255,.25);border-radius:99px;background:none;color:#fff;padding:7px 11px;cursor:pointer;transition:background .3s}
+.chips button:hover{background:rgba(255,255,255,.12)}
+.tg{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:14px 0;padding:12px 18px;border:1px solid rgba(255,255,255,.14);border-radius:18px;cursor:pointer}
+.tg b{display:block;font-weight:500;font-size:14px}.tg small{display:block;color:rgba(255,255,255,.55);font-size:12px}
+.tg input{appearance:none;-webkit-appearance:none;width:46px;height:28px;border-radius:14px;background:rgba(255,255,255,.2);position:relative;flex:none;cursor:pointer;margin:0;transition:background .3s}
+.tg input::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .35s var(--e)}
+.tg input:checked{background:#3ddc84}.tg input:checked::after{left:21px}
+.go{width:100%;font:600 15px 'Geist',sans-serif;border:0;border-radius:99px;background:#3ddc84;color:#04170b;padding:17px;cursor:pointer;transition:background .3s,transform .3s var(--e)}
+.go:hover{background:#6ee7a0}.go:active{transform:scale(.985)}
+.pri{font:500 14px 'Geist',sans-serif;border:0;border-radius:99px;background:#000;color:#fff;padding:12px 22px;cursor:pointer;transition:background .3s}
+.pri:hover{background:#2a2a2d}
+.dk .pri{background:#fff;color:#000}.dk .pri:hover{background:#d8d8dc}
+.ghost{font:500 14px 'Geist',sans-serif;border:1px solid var(--ln);border-radius:99px;background:none;color:inherit;padding:11px 20px;cursor:pointer}
+section{padding:clamp(120px,22vw,260px) 0}
+h2{font-size:clamp(34px,6vw,68px)}
+.sub{margin-top:18px;color:var(--mu);max-width:40ch}
+.rv{opacity:0;transform:translateY(28px);transition:opacity 1.2s var(--e),transform 1.2s var(--e)}
+.rv.in{opacity:1;transform:none}
+#results{background:var(--off);padding:clamp(72px,12vw,140px) 0}
+#results h2{font-size:clamp(28px,4vw,40px)}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px;margin-bottom:28px}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.pill{font:inherit;font-size:13px;border:1px solid var(--ln);background:none;color:#1d1d1f;padding:7px 14px;border-radius:99px;cursor:pointer;transition:all .3s}
+.pill[aria-pressed=true]{background:#000;border-color:#000;color:#fff}
+.bus{display:grid;grid-template-columns:1fr auto;gap:14px 24px;border-radius:20px;padding:26px;margin-bottom:12px;background:#fff}
+.tm{font-size:28px;font-weight:300;letter-spacing:-.03em}
+.tm i{display:inline-block;width:32px;height:1px;background:var(--ln);vertical-align:middle;margin:0 10px}
+.price{font-size:28px;font-weight:300;letter-spacing:-.03em;text-align:right}
+.bus small{display:block;color:var(--mu);font-size:13px}
+.ok{color:var(--ac);font-weight:500;font-size:13px}
+.bus .r{display:grid;justify-items:end;gap:10px;grid-row:span 2}
+.empty,.err{padding:22px;border:1px dashed var(--ln);border-radius:16px;color:var(--mu)}
+.err{color:#c62828}
+.st{padding:clamp(140px,26vw,320px) 0}
+.big{font-size:clamp(30px,5.6vw,68px);font-weight:300;letter-spacing:-.035em;line-height:1.12;max-width:20ch}
+.flow{display:grid;gap:72px}
+.stw{position:relative;padding-left:44px}
+.steps{list-style:none;margin:0;padding:0}
+.stw::before,#fill{content:"";position:absolute;left:6px;top:8px;width:1px;background:var(--ln)}
+.stw::before{bottom:8px}
+#fill{width:2px;left:5.5px;height:0;border-radius:2px;background:linear-gradient(180deg,#fff,#3ddc84);box-shadow:0 0 14px rgba(61,220,132,.3)}
+#fill::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,transparent,rgba(255,255,255,.95),transparent) 0 0/100% 70px no-repeat;animation:run 2.2s linear infinite}
+#fill::after{content:"";position:absolute;left:50%;bottom:-5px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:#3ddc84;box-shadow:0 0 0 4px rgba(61,220,132,.18),0 0 16px 2px rgba(61,220,132,.8)}
+@keyframes run{from{background-position:0 0}to{background-position:0 100%}}
+.steps li{position:relative;min-height:34vh}
+.steps li:last-child{min-height:0}
+.steps li::before{content:"";position:absolute;left:-44px;top:7px;width:13px;height:13px;border-radius:50%;background:#000;border:1px solid rgba(255,255,255,.35);transition:all .6s var(--e)}
+.steps li.on::before{background:#fff;border-color:#fff;box-shadow:0 0 0 6px rgba(255,255,255,.12)}
+.steps h3{font-size:clamp(24px,3.4vw,34px);font-weight:300;letter-spacing:-.03em;opacity:.35;transition:opacity .8s var(--e)}
+.steps li.on h3{opacity:1}
+.steps p{margin-top:8px;color:var(--mu);max-width:34ch}
+#rates{background:var(--off)}
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:56px 48px;margin-top:72px}
+.spec{border-top:1px solid var(--ln);padding-top:20px}
+.spec small{display:block;color:var(--mu);font-size:13px}
+.spec b{display:block;margin:14px 0 18px;font-size:clamp(48px,7vw,84px);font-weight:200;letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums}
+.spec.me b{color:var(--ac)}
+.bar{display:block;height:2px;background:var(--ln);margin-bottom:14px}
+.bar u{display:block;height:100%;background:#1d1d1f;transition:width 1.2s var(--e)}
+.me .bar u{background:var(--ac)}
+.spec span{color:var(--mu);font-size:13px}
+.sv{margin-top:64px;font-size:17px;font-weight:300;letter-spacing:-.01em}
+.fn{margin-top:14px;color:var(--mu);font-size:12px;max-width:70ch}
+.cities{display:grid;gap:0 72px;margin-top:72px}
+.cities button{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-bottom:1px solid var(--ln);font-size:clamp(22px,3vw,30px);font-weight:300;letter-spacing:-.02em;cursor:pointer;transition:color .4s,padding .5s var(--e)}
+.cities button::after{content:"›";color:var(--mu);transition:color .4s}
+.cities button{color:rgba(255,255,255,.72)}.cities button:hover{color:#fff;padding-left:10px}.cities button:hover::after{color:#fff}
+.cities button:focus-visible{outline:2px solid #3ddc84}
+.trk{display:flex;gap:12px;max-width:480px;margin-top:48px;align-items:center}
+.trk input{flex:1;min-width:0;font:inherit;font-size:16px;padding:12px 0;border:0;border-bottom:1px solid var(--ln);background:none;color:#1d1d1f;border-radius:0}
+.trk input:focus{outline:0;border-color:#000}
+.tl{list-style:none;margin:32px 0 0;padding:0;max-width:520px}
+.tl li{position:relative;padding:0 0 26px 32px;color:var(--mu);font-size:13px}
+.tl li::before{content:"";position:absolute;left:0;top:5px;width:11px;height:11px;border-radius:50%;border:1px solid var(--ln);background:#fff}
+.tl li::after{content:"";position:absolute;left:5px;top:19px;bottom:-5px;width:1px;background:var(--ln)}
+.tl li:last-child::after{display:none}
+.tl li b{display:block;color:#1d1d1f;font-size:16px;font-weight:500}
+.tl li.d::before{background:var(--ac);border-color:var(--ac)}.tl li.d::after{background:var(--ac)}
+.tl li.a::before{background:var(--ac);border-color:var(--ac);box-shadow:0 0 0 5px color-mix(in srgb,var(--ac) 22%,transparent)}
+.tl li.a{color:#1d1d1f}
+footer{padding:clamp(120px,20vw,220px) 0 calc(40px + env(safe-area-inset-bottom,0px));overflow:hidden}
+footer h2{margin-bottom:36px}
+.wm{margin-top:clamp(80px,14vw,160px);font-size:clamp(56px,17vw,220px);font-weight:600;letter-spacing:-.055em;line-height:.9;color:#141614;white-space:nowrap;user-select:none}
+.legal{margin-top:36px;font-size:12px;color:var(--mu)}
+dialog{border:0;border-radius:26px;padding:0;width:min(500px,calc(100vw - 20px));background:#fff;color:#1d1d1f}
+dialog::backdrop{background:rgba(0,0,0,.6);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.dl{padding:28px;max-height:90vh;overflow:auto;font-size:14px}
+.dl h3{font-size:12px;font-weight:600;color:var(--mu);margin:22px 0 10px}
+.dl>div>h3:first-child{margin-top:0;font-size:22px;font-weight:300;letter-spacing:-.02em;color:#1d1d1f}
+.f{display:grid;gap:4px;margin-bottom:10px}
+.f label{font-size:12px;color:var(--mu)}
+.dl input,.dl select{font:inherit;font-size:16px;width:100%;padding:11px 13px;border:1px solid var(--ln);border-radius:12px;background:#fff;color:#1d1d1f}
+.dl input:focus,.dl select:focus{outline:0;border-color:#000}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sum{background:var(--off);border-radius:14px;padding:14px 16px;margin:14px 0 4px}
+.tot{display:flex;justify-content:space-between;font-weight:500;padding:12px 0;border-top:1px solid var(--ln);margin-top:4px}
+.id{font-size:36px;font-weight:200;letter-spacing:-.04em;color:var(--ac);margin:8px 0}
+@media(min-width:900px){.flow{grid-template-columns:1fr 1fr;gap:96px}.fh{position:sticky;top:calc(env(safe-area-inset-top,0px) + 28vh);align-self:start}.cities{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.two{grid-template-columns:1fr}.bus{grid-template-columns:1fr}.bus .r{justify-items:stretch;grid-row:auto}.price{text-align:left}.chips button{padding:7px 9px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}.ld,.rv{opacity:1;transform:none;animation:none}.rd{animation:none;stroke-dashoffset:0}.mv{display:none}}
+
+/* neutral glass and finish */
+html{scroll-behavior:smooth}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.04;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.orb{position:absolute;border-radius:50%;pointer-events:none}
+.o1{width:680px;height:680px;right:-200px;top:2%;background:radial-gradient(circle,rgba(255,255,255,.1),transparent 66%);animation:fl 22s ease-in-out infinite alternate}
+.o2{width:560px;height:560px;left:-220px;bottom:-140px;background:radial-gradient(circle,rgba(160,175,200,.12),transparent 66%);animation:fl 28s ease-in-out -9s infinite alternate}
+@keyframes fl{to{transform:translate3d(-70px,50px,0) scale(1.15)}}
+.cue{position:absolute;left:50%;bottom:20px;width:1px;height:56px;background:rgba(255,255,255,.18);overflow:hidden;display:none}
+.cue::after{content:"";position:absolute;left:0;top:-40%;width:1px;height:40%;background:#fff;animation:cu 2.6s var(--e) infinite}
+@keyframes cu{to{top:110%}}
+.row{border-bottom-color:rgba(255,255,255,.09)}
+.chips button{background:rgba(255,255,255,.07)}
+.go{box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
+#results,#rates{background:radial-gradient(60% 70% at 92% 0%,rgba(20,24,30,.08),transparent 70%),radial-gradient(45% 50% at 0% 100%,rgba(20,24,30,.06),transparent 70%),#f5f5f7}
+#track{background:radial-gradient(50% 60% at 100% 100%,rgba(20,24,30,.07),transparent 70%),#fafafa}
+#partners{background:radial-gradient(50% 70% at 10% 30%,rgba(20,24,30,.07),transparent 70%),radial-gradient(50% 60% at 95% 80%,rgba(20,24,30,.06),transparent 70%),#fff}
+.bus,.spec,.tile,#tr:not(:empty){background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(28px) saturate(160%);backdrop-filter:blur(28px) saturate(160%);border:1px solid rgba(255,255,255,.95);box-shadow:inset 0 1px 0 #fff,0 20px 50px -26px rgba(20,24,30,.35)}
+.bus{transition:transform .6s var(--e),box-shadow .6s var(--e)}
+.bus:hover{transform:translateY(-3px);box-shadow:inset 0 1px 0 #fff,0 28px 60px -24px rgba(20,24,30,.45)}
+.specs{gap:20px}
+.spec{border-radius:26px;padding:30px}
+#tr:not(:empty){margin-top:44px;padding:28px 30px 8px;max-width:560px;border-radius:26px}
+#tr .tl{margin-top:18px}
+.pill{background:rgba(255,255,255,.6);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.pill[aria-pressed=true]{background:#000}
+.pri{box-shadow:inset 0 1px 0 rgba(255,255,255,.16)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:44px 32px;margin-top:clamp(90px,14vw,190px);border-top:1px solid var(--ln);padding-top:36px}
+.stats b{display:block;font-size:clamp(46px,6vw,76px);font-weight:200;letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums}
+.stats span{display:block;margin-top:12px;color:var(--mu);font-size:13px;max-width:22ch}
+.duo{display:grid;gap:20px;margin-top:72px}
+.tile{border-radius:28px;padding:clamp(28px,4vw,44px);min-height:260px;display:flex;flex-direction:column;justify-content:space-between}
+.tile h3{font-size:clamp(26px,3.4vw,38px);font-weight:300;letter-spacing:-.03em;line-height:1.1}
+.tile p{color:var(--mu);max-width:30ch;margin-top:48px}
+#how{background:radial-gradient(45% 40% at 88% 18%,rgba(255,255,255,.06),transparent 70%),#000}
+#where{background:radial-gradient(40% 40% at 10% 90%,rgba(255,255,255,.05),transparent 70%),#000}
+.cities button:hover{background:rgba(255,255,255,.04)}
+footer{background:radial-gradient(60% 50% at 50% 0%,rgba(255,255,255,.06),transparent 70%),#000}
+.fcols{display:flex;flex-wrap:wrap;gap:48px 96px;margin-top:96px;padding-top:36px;border-top:1px solid var(--ln)}
+.fcols div{display:grid;gap:10px;align-content:start;font-size:13px}
+.fcols b{font-weight:500;margin-bottom:6px}
+.fcols a{color:var(--mu);text-decoration:none;transition:color .3s}.fcols a:hover{color:#fff}
+.legal{margin-top:56px}
+.wm{margin-top:clamp(60px,10vw,120px);background:linear-gradient(180deg,#2a2c2e,#060606 88%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+@media(min-width:900px){.cue{display:block}.duo{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.row{gap:12px;padding:0 16px}.row input{font-size:16px}.chips button{font-size:11px;padding:6px 8px}.spec{padding:24px}}
+@media(prefers-reduced-motion:reduce){.orb,.cue::after{animation:none}.pg,.cue{display:none}html{scroll-behavior:auto}}
+
+/* header, black card, white form */
+.pg{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);height:2px;z-index:45;background:linear-gradient(90deg,#fff,#3ddc84);transform:scaleX(0);transform-origin:0 50%}
+.card,.tg{background:#0c0c0d;border:1px solid rgba(255,255,255,.12);-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 30px 70px -30px rgba(0,0,0,.9)}
+.chips button{background:transparent}
+dialog{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;border:0;box-shadow:0 40px 100px -30px rgba(0,0,0,.7)}
+dialog::backdrop{background:rgba(0,0,0,.62);-webkit-backdrop-filter:none;backdrop-filter:none}
+.dl input,.dl select{background:#fff}
+.sum{background:#f5f5f7;border:0}
+@media(min-width:520px){.nb .lg{display:inline}}
+@media(min-width:900px){.nl{display:flex}.mb,.mn{display:none}}
+@media(prefers-reduced-motion:reduce){#fill::before{animation:none}.mn a{transition:none}}
+
+/* intro popup */
+html.il{overflow:hidden}
+#sf{width:100%;max-width:460px}
+.fe{margin:12px 2px 0;font-size:13px;color:#ff8a80}
+.fl{all:unset;cursor:pointer;color:var(--mu);transition:color .3s}
+.fl:hover{color:#fff}.fl:focus-visible{outline:2px solid #3ddc84;outline-offset:3px}
+.intro{position:fixed;inset:0;z-index:100;display:flex;overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 16px) 16px calc(env(safe-area-inset-bottom,0px) + 16px);background:rgba(0,0,0,.5);-webkit-backdrop-filter:blur(18px) saturate(130%);backdrop-filter:blur(18px) saturate(130%);transition:opacity .8s var(--e),visibility 0s}
+.intro.out{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .8s var(--e),visibility 0s .8s}
+.intro.play{animation:bl 1.4s var(--e) .8s both}
+@keyframes bl{from{background:rgba(0,0,0,0);-webkit-backdrop-filter:blur(0);backdrop-filter:blur(0)}}
+.icard{position:relative;width:100%;max-width:520px;margin:auto;overflow:hidden;background:#0a0a0b;color:#fff;border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:24px 24px 28px;box-shadow:0 50px 140px -30px rgba(0,0,0,.9)}
+.play .icard{animation:cin 1.5s var(--e) 1s both}
+.out .icard{animation:cout .7s var(--e) forwards}
+@keyframes cin{from{opacity:0;transform:translateY(46px) scale(.96);filter:blur(12px)}}
+@keyframes cout{to{opacity:0;transform:translateY(18px) scale(.985)}}
+.icard::before{content:"";position:absolute;left:0;top:0;height:1px;width:100%;background:linear-gradient(90deg,transparent,#fff,#3ddc84,transparent);transform:translateX(-100%)}
+.play .icard::before{animation:swp 1.8s var(--e) 1.5s forwards}
+@keyframes swp{to{transform:translateX(100%)}}
+.itop{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px}
+.isk{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:none;color:#fff;padding:0;cursor:pointer;transition:background .3s,transform .5s var(--e)}
+.isk:hover{background:rgba(255,255,255,.1);transform:rotate(90deg)}
+.ia{opacity:0;transform:translateY(18px)}
+.play .ia{animation:up 1.1s var(--e) var(--t,0s) forwards}
+.il1{color:rgba(255,255,255,.6);font-size:14px}
+.ich{margin:22px 0 40px;display:grid;gap:22px}
+.ch{padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.1)}
+.ch:last-child{border:0;padding-bottom:0}
+.ch h3{position:relative;display:inline-block;font-size:clamp(24px,6.4vw,36px);font-weight:300;letter-spacing:-.035em;line-height:1.1}
+.ch span{display:block;margin-top:6px;color:rgba(255,255,255,.5);font-size:12px}
+.play .ch h3,.play .ch span{animation:dimc 1.2s ease var(--d) forwards}
+.stk{position:absolute;left:-3px;right:-3px;top:54%;height:2px;background:#fff;transform:scaleX(0);transform-origin:0 50%}
+.play .stk{animation:sx .9s var(--e) var(--s) forwards}
+.i2{font-size:clamp(38px,10.5vw,68px);font-weight:300;letter-spacing:-.045em;line-height:1.05;margin-top:12px;max-width:none;clip-path:inset(-12% 100% -12% 0)}
+.play .i2{animation:wipe 1.3s var(--e) var(--t) forwards}
+@keyframes wipe{from{clip-path:inset(-12% 100% -12% 0);transform:translateY(10px)}to{clip-path:inset(-12% -2% -12% -2%);transform:none}}
+.rl{position:relative;height:2px;margin:26px 0 34px;background:rgba(255,255,255,.14)}
+.rl::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#fff,#3ddc84);transform:scaleX(0);transform-origin:0 50%}
+.rl::after{content:"";position:absolute;left:0;top:-4px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:#3ddc84;box-shadow:0 0 0 5px rgba(61,220,132,.2),0 0 18px 3px rgba(61,220,132,.7);opacity:0}
+.play .rl::before{animation:sx 1.4s var(--e) 5.4s forwards}
+.play .rl::after{animation:tv 1.4s var(--e) 5.4s forwards}
+@keyframes sx{to{transform:scaleX(1)}}
+@keyframes dimc{to{color:rgba(255,255,255,.28)}}
+@keyframes tv{from{left:0;opacity:1}to{left:100%;opacity:1}}
+.ibtn{width:100%;display:flex;justify-content:center;align-items:center;gap:10px;font:600 15px 'Geist',sans-serif;border:0;border-radius:99px;background:#3ddc84;color:#04170b;padding:16px 24px;cursor:pointer;transition:background .3s}
+.ibtn span{display:inline-block;transition:transform .5s var(--e)}
+.ibtn:hover{background:#6ee7a0}.ibtn:hover span{transform:translateX(4px)}
+.ipr{position:absolute;left:0;bottom:0;height:2px;width:100%;background:linear-gradient(90deg,#fff,#3ddc84);transform:scaleX(0);transform-origin:0 50%}
+.play .ipr{animation:sx 4.6s linear 1.7s forwards}
+@media(min-width:520px){.icard{padding:32px 36px 36px}.intro{padding:24px}}
+@media(min-width:1100px){.hg{grid-template-columns:1fr 420px;gap:96px;align-items:center}}
+@media(prefers-reduced-motion:reduce){.play,.play *,.play *::before,.play *::after{animation:none!important}.ia{opacity:1;transform:none}.i2{clip-path:none}.stk{transform:scaleX(1)}.ch h3,.ch span{color:rgba(255,255,255,.28)}.rl::before{transform:none}.rl::after{left:100%;opacity:1}.ipr,.icard::before{display:none}}
+</style>
+</head>
+<body>
+<div class="intro play" id="intro" role="dialog" aria-modal="true" aria-labelledby="it">
+<div class="icard">
+<div class="itop"><span class="logo"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="9" fill="#fff"/><path d="M7 20c4 0 4-10 8-10s4 10 8 10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/><circle cx="23" cy="20" r="2.6" fill="#3ddc84"/></svg>Parcelway</span><button class="isk" id="isk" type="button" aria-label="Close"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button></div>
+<p class="il1 ia" style="--t:1.7s">Before, there were two choices.</p>
+<div class="ich">
+<div class="ch ia" style="--t:2.1s;--d:3.9s"><h3>Fast, but expensive.<i class="stk" style="--s:3.7s"></i></h3><span>Premium express</span></div>
+<div class="ch ia" style="--t:2.7s;--d:4.2s"><h3>Cheap, but slow.<i class="stk" style="--s:4s"></i></h3><span>Postal parcel</span></div>
+</div>
+<p class="il1 ia" style="--t:4.7s">Now there is one.</p>
+<h2 class="i2 wp" id="it" style="--t:5.1s">Cheap &amp; fast.</h2>
+<div class="rl"></div>
+<button class="ibtn ia" id="ibk" type="button" style="--t:6.1s">Book a parcel<span aria-hidden="true">→</span></button>
+<i class="ipr"></i>
+</div>
+</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="sb" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 11h16M7 18v3M17 18v3" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="8.5" cy="14.5" r="1" fill="currentColor"/><circle cx="15.5" cy="14.5" r="1" fill="currentColor"/></symbol>
+<symbol id="sc" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.6" fill="none"/></symbol>
+<symbol id="sk" viewBox="0 0 24 24"><path d="M3 8l9-5 9 5v9l-9 5-9-5zM3 8l9 5 9-5M12 13v9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<nav id="nv"><div class="wrap">
+<a class="logo" href="#top" aria-label="Parcelway home"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="9" fill="#fff"/><path d="M7 20c4 0 4-10 8-10s4 10 8 10" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/><circle cx="23" cy="20" r="2.6" fill="#3ddc84"/></svg>Parcelway</a>
+<div class="nl"><a href="#how">How it works</a><a href="#rates">Rates</a><a href="#where">Network</a><a href="#partners">Partners</a><a href="#track">Track</a></div>
+<div class="nr"><a class="nb" href="#top">Book<span class="lg"> a parcel</span></a><button class="mb" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mn"><i></i><i></i></button></div>
+</div></nav>
+<div class="mn" id="mn"><a href="#top" style="--i:1">Book a parcel</a><a href="#how" style="--i:2">How it works</a><a href="#rates" style="--i:3">Rates</a><a href="#where" style="--i:4">Network</a><a href="#partners" style="--i:5">Partners</a><a href="#track" style="--i:6">Track a parcel</a><small>Parcelway. Delhi, Chandigarh and Himachal Pradesh.</small></div>
+<i class="pg" id="pg"></i>
+
+<header class="hero dk" id="top">
+<i class="orb o1"></i><i class="orb o2"></i>
+<svg class="land" viewBox="0 0 1200 500" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+<path d="M0 330L120 260 240 300 380 200 520 280 660 180 800 270 940 210 1080 290 1200 240V500H0Z" fill="#101113"/>
+<path d="M0 400L150 340 300 380 480 310 640 370 820 300 980 360 1100 330 1200 360V500H0Z" fill="#09090a"/>
+<path id="route" class="rd" pathLength="1" d="M-20 440C200 390 320 450 520 390S860 340 1000 370 1150 330 1220 350" fill="none" stroke="#3ddc84" stroke-width="1.5" stroke-linecap="round"/>
+<g class="mv"><circle r="12" fill="#3ddc84" opacity=".22"/><circle r="4" fill="#fff"/><animateMotion dur="11s" begin="2.5s" repeatCount="indefinite"><mpath href="#route"/></animateMotion></g>
+</svg>
+<i class="cue" aria-hidden="true"></i>
+<div class="wrap hg">
+<div>
+<h1 class="ld">Faster Delivery.<br>Lower Fares.</h1>
+<p class="lead ld" style="--d:.15s">Delhi and Chandigarh to the hills of Himachal Pradesh. Doorstep pickup, an intercity bus, doorstep delivery.</p>
+<a class="lk ld" style="--d:.3s" href="#how">See how it works</a>
+</div>
+<form id="sf" class="ld" style="--d:.4s" aria-label="Find a bus for your parcel">
+<div class="card">
+<div class="row"><svg class="ic" aria-hidden="true"><use href="#sb"/></svg><div><label for="from">From</label><select id="from"></select></div></div>
+<div class="row"><svg class="ic" aria-hidden="true"><use href="#sb"/></svg><div><label for="to">To</label><select id="to"></select></div></div>
+<button class="sw" type="button" id="swap" aria-label="Swap from and to">⇅</button>
+<div class="row"><svg class="ic" aria-hidden="true"><use href="#sc"/></svg><div><label for="date">Pickup date</label><input type="date" id="date" required></div><div class="chips"><button type="button" data-d="0">Today</button><button type="button" data-d="1">Tomorrow</button></div></div>
+<div class="row"><svg class="ic" aria-hidden="true"><use href="#sk"/></svg><div><label for="w">Parcel weight in kg</label><input type="number" id="w" value="5" min="0.5" max="30" step="0.5" required></div></div>
+</div>
+<label class="tg"><span><b>Doorstep pickup and delivery</b><small id="dtx">A gig worker collects and delivers</small></span><input type="checkbox" id="door" role="switch" checked></label>
+<button class="go" type="submit">Search buses</button>
+<p class="fe" id="fe" role="alert" hidden></p>
+</form>
+</div>
+</header>
+
+<section id="results" hidden><div class="wrap">
+<div class="head"><div><h2 id="rt"></h2><div class="mute" id="rs"></div></div>
+<div class="pills" role="group" aria-label="Sort by"><button class="pill" data-s="dep" aria-pressed="true">Earliest pickup</button><button class="pill" data-s="eta" aria-pressed="false">Earliest delivery</button><button class="pill" data-s="price" aria-pressed="false">Lowest price</button></div></div>
+<div id="res"></div>
+</div></section>
+
+<section class="st"><div class="wrap"><p class="big" id="stm">Buses and gig workers already connect every hill town, every single day. We simply put your parcel on the next one.</p>
+<div class="stats rv">
+<div><b class="num" data-to="12">12</b><span>Stops at launch</span></div>
+<div><b class="num" data-to="3">3</b><span>Regions: Delhi, Chandigarh and Himachal Pradesh</span></div>
+<div><b class="num" data-to="30" data-s=" kg">30 kg</b><span>Maximum weight per parcel</span></div>
+<div><b class="num" data-to="90" data-s=" min">90 min</b><span>Pickup before the bus departs</span></div>
+</div></div></section>
+
+<section class="dk" id="how"><div class="wrap flow">
+<div class="fh"><h2 class="rv">How delivery happens</h2><p class="sub rv">Buses already run these roads every day.</p></div>
+<div class="stw"><i id="fill"></i><ol class="steps" id="steps">
+<li><h3>You book</h3><p>Pick a route and a bus. It takes about a minute.</p></li>
+<li><h3>A gig worker collects</h3><p>A verified local picks the parcel up at your door.</p></li>
+<li><h3>The bus carries it</h3><p>It rides an intercity bus that is already making the trip.</p></li>
+<li><h3>A gig worker delivers</h3><p>Someone at the other end brings it to the doorstep.</p></li>
+<li><h3>Delivered</h3><p>The status updates in tracking.</p></li>
+</ol></div>
+</div></section>
+
+<section id="rates"><div class="wrap">
+<h2 class="rv">Faster than the post.<br>Less than express.</h2>
+<p class="sub rv" id="cmh"></p>
+<div class="specs rv">
+<div class="spec"><small>India Post</small><b id="v1">₹0</b><i class="bar"><u id="b1"></u></i><span>Several days</span></div>
+<div class="spec me"><small>Parcelway</small><b id="v2">₹0</b><i class="bar"><u id="b2"></u></i><span id="n2"></span></div>
+<div class="spec"><small>Premium express</small><b id="v3">₹0</b><i class="bar"><u id="b3"></u></i><span>Usually 1 to 2 days</span></div>
+</div>
+<p class="sv rv" id="sv"></p>
+<p class="fn">India Post Parcel-Retail tariff: ₹36 for the first 500 g and ₹16 for each additional 500 g, before GST. Premium express figures are our estimates.</p>
+</div></section>
+
+<section class="dk" id="where"><div class="wrap">
+<h2 class="rv">Where we go</h2>
+<p class="sub rv">Delhi and Chandigarh to the hills. Tap a town to send a parcel there.</p>
+<div class="cities rv" id="cities"></div>
+</div></section>
+
+<section id="partners"><div class="wrap">
+<h2 class="rv">Built on what<br>already moves.</h2>
+<p class="sub rv">We work with existing bus operators and verified gig workers.</p>
+<div class="duo rv">
+<div class="tile"><h3>Bus operators</h3><p>Carry parcels on routes you already run. No new buses, no new routes.</p></div>
+<div class="tile"><h3>Gig workers</h3><p>Collect and deliver parcels near you. Paid for every completed job.</p></div>
+</div>
+</div></section>
+
+<section id="track"><div class="wrap">
+<h2 class="rv">Track a parcel</h2>
+<p class="sub rv">Enter the ID from your booking.</p>
+<form class="trk" id="tf"><input id="tid" placeholder="PW123456" aria-label="Parcel ID" autocapitalize="characters" required><button class="pri" type="submit">Track parcel</button></form>
+<div id="tr"></div>
+</div></section>
+
+<footer class="dk"><div class="wrap">
+<h2 class="rv">Ready when<br>your parcel is.</h2>
+<button class="pri" id="up" type="button">Book a parcel</button>
+<div class="fcols">
+<div><b>Send</b><a href="#top">Book a parcel</a><a href="#rates">Rates</a><a href="#where">Network</a></div>
+<div><b>Learn</b><a href="#how">How it works</a><a href="#partners">Partners</a><a href="#track">Track a parcel</a><button class="fl" id="replay" type="button">Watch the intro</button></div>
+</div>
+<p class="legal">© 2026 Parcelway. A demo concept: bus operators, timings and prices shown here are sample data.</p>
+<div class="wm" aria-hidden="true">Parcelway</div>
+</div></footer>
+
+<dialog id="bk"><div class="dl">
+<div id="s1">
+<h3>Book your parcel</h3>
+<div class="sum" id="sm"></div>
+<form id="bf">
+<h3>Sender</h3>
+<div class="two"><div class="f"><label for="sn">Name</label><input id="sn" required autocomplete="name"></div><div class="f"><label for="sp">Mobile</label><input id="sp" required pattern="[6-9][0-9]{9}" inputmode="numeric" maxlength="10" autocomplete="tel"></div></div>
+<div class="f"><label for="sa">Pickup address</label><input id="sa" required></div>
+<h3>Receiver</h3>
+<div class="two"><div class="f"><label for="rn">Name</label><input id="rn" required></div><div class="f"><label for="rp">Mobile</label><input id="rp" required pattern="[6-9][0-9]{9}" inputmode="numeric" maxlength="10"></div></div>
+<div class="f"><label for="ra">Delivery address</label><input id="ra" required></div>
+<div class="two"><div class="f"><label for="ct">Contents</label><select id="ct"><option>Documents</option><option>Clothes</option><option>Electronics</option><option>Packaged food</option><option>Other</option></select></div><div class="f"><label for="py">Payment</label><select id="py"><option>UPI</option><option>Pay at pickup</option></select></div></div>
+<div class="tot"><span id="fl">Fare</span><span id="fr"></span></div>
+<div class="tot" style="border:0;margin:0;padding-top:0"><span class="mute">GST (18%)</span><span id="gs" class="mute"></span></div>
+<div class="tot"><span>Total</span><span id="tt"></span></div>
+<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px"><button type="button" class="ghost" id="cx">Cancel</button><button class="pri" type="submit">Confirm booking</button></div>
+</form></div>
+<div id="s2" hidden>
+<h3>Parcel booked</h3>
+<div class="id" id="bid"></div>
+<p id="bm"></p>
+<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:20px"><button class="ghost" id="cl" type="button">Close</button><button class="pri" id="gt" type="button">Track parcel</button></div>
+</div>
+</div></dialog>
+
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const CITY={Delhi:[28.61,77.21],Chandigarh:[30.73,76.78],Shimla:[31.10,77.17],Manali:[32.24,77.19],Dharamshala:[32.22,76.32],Bir:[32.05,76.72],Kullu:[31.96,77.11],Mandi:[31.71,76.93],Palampur:[32.11,76.54],Kasol:[32.01,77.31],Dalhousie:[32.54,75.97],Solan:[30.91,77.10]};
+const ROAD={Delhi:{Chandigarh:250,Shimla:345,Manali:540,Dharamshala:480,Bir:510,Kullu:510,Mandi:450,Palampur:490,Kasol:535,Dalhousie:565,Solan:290},Chandigarh:{Shimla:115,Manali:310,Dharamshala:250,Bir:270,Kullu:265,Mandi:200,Palampur:235,Kasol:295,Dalhousie:310,Solan:65}};
+const OPS=['Himalayan Queen','Pir Panjal Travels','Snowline Express','Valley Link','Kailash Coaches'];
+const hub=n=>n==='Delhi'||n==='Chandigarh';
+const spd=(a,b)=>hub(a)&&hub(b)?55:42;
+const km=(a,b)=>{const k=ROAD[a]&&ROAD[a][b]||ROAD[b]&&ROAD[b][a];if(k)return k;const r=x=>x*Math.PI/180,[p,q]=CITY[a],[u,v]=CITY[b];const h=Math.sin(r(u-p)/2)**2+Math.cos(r(p))*Math.cos(r(u))*Math.sin(r(v-q)/2)**2;return Math.max(40,Math.round(12742*Math.asin(Math.sqrt(h))*2))};
+const price=(w,d)=>Math.round(30+w*(6+d*.03)),post=w=>36+Math.max(0,Math.ceil((w-.5)/.5))*16,prem=p=>Math.round(p*2.6+90);
+const hm=d=>d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:false});
+const dm=d=>d.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'});
+const dt=d=>dm(d)+', '+hm(d);
+const dur=h=>Math.floor(h)+'h '+String(Math.round(h%1*60)).padStart(2,'0')+'m';
+const inr=n=>'₹'+n.toLocaleString('en-IN');
+const calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const go=id=>$(id).scrollIntoView({behavior:calm?'auto':'smooth'});
+let BK={};try{BK=JSON.parse(localStorage.getItem('pw_bk')||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem('pw_bk',JSON.stringify(BK))}catch(e){}};
+let S=null,timer=null;
+
+const names=Object.keys(CITY);
+$('#from').innerHTML=$('#to').innerHTML=names.map(n=>`<option>${n}</option>`).join('');
+$('#from').value='Delhi';$('#to').value='Manali';
+const iso=n=>{const t=new Date(Date.now()+n*864e5);return new Date(t-t.getTimezoneOffset()*6e4).toISOString().slice(0,10)};
+$('#date').value=$('#date').min=iso(0);
+document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>$('#date').value=iso(+b.dataset.d));
+$('#swap').onclick=()=>{const a=$('#from').value;$('#from').value=$('#to').value;$('#to').value=a;ferr('');cmp()};
+$('#door').onchange=()=>{$('#dtx').textContent=$('#door').checked?'A gig worker collects and delivers':'Drop at and collect from the bus stand, 20% less';cmp()};
+$('#cities').innerHTML=names.filter(n=>n!=='Delhi').map(n=>`<button type="button">${n}</button>`).join('');
+document.querySelectorAll('#cities button').forEach(b=>b.onclick=()=>{$('#to').value=b.textContent;if($('#from').value===b.textContent)$('#from').value='Delhi';ferr('');cmp();go('#top')});
+$('#up').onclick=()=>go('#top');
+
+const ferr=m=>{const e=$('#fe');e.textContent=m;e.hidden=!m};
+function cur(){const from=$('#from').value,to=$('#to').value,w=Math.min(30,Math.max(.5,+$('#w').value||1)),door=$('#door').checked,d=from===to?300:km(from,to);return{from,to,w,d,door,p:Math.round(price(w,d)*(door?1:.8))}}
+
+function tw(el,to){const from=+el.dataset.v||0;el.dataset.v=to;cancelAnimationFrame(el._r);if(calm){el.textContent=inr(to);return}const t0=performance.now(),f=t=>{const k=Math.min(1,(t-t0)/800),e=1-Math.pow(1-k,3);el.textContent=inr(Math.round(from+(to-from)*e));if(k<1)el._r=requestAnimationFrame(f)};el._r=requestAnimationFrame(f)}
+function cmp(){const c=cur(),ip=post(c.w),pm=prem(c.p),mx=Math.max(ip,pm,c.p),hrs=c.d/spd(c.from,c.to)+(c.door?3.5:.5);
+$('#cmh').textContent=`${c.from} to ${c.to}, ${c.w} kg, about ${c.d} km by road.`;
+[[1,ip],[2,c.p],[3,pm]].forEach(([k,v])=>{tw($('#v'+k),v);$('#b'+k).style.width=Math.round(v/mx*100)+'%'});
+$('#n2').textContent=`About ${dur(hrs)}, ${c.door?'door to door':'bus stand to bus stand'}`;
+$('#sv').textContent=`Parcelway is ${inr(pm-c.p)} less than premium express`+(c.p<ip?` and ${inr(ip-c.p)} less than India Post.`:', and much faster than India Post.')}
+['from','to','w'].forEach(i=>$('#'+i).addEventListener('input',cmp));cmp();
+['from','to','w','date'].forEach(i=>$('#'+i).addEventListener('input',()=>ferr('')));
+
+$('#sf').onsubmit=e=>{e.preventDefault();
+const c=cur(),ds=$('#date').value;
+if(c.from===c.to){ferr('Choose two different stops.');return}
+if(!hub(c.from)&&!hub(c.to)){ferr('Parcels run to and from Delhi and Chandigarh. Choose one of them as your start or destination.');return}
+const hrs=c.d/spd(c.from,c.to)+.5,base=new Date(ds+'T00:00:00'),seed=(c.from+c.to).length;
+const sl=[[390,'Morning service',0],[825,'Afternoon service',15],[1230,'Night service',-10],[1335,'Late night service',0]];
+const buses=sl.map((s,i)=>{const dep=new Date(base.getTime()+(s[0]+(seed*7+i*5)%25)*6e4),arr=new Date(dep.getTime()+hrs*36e5);return{op:OPS[(seed+i)%OPS.length],tag:s[1],dep,arr,pick:new Date(dep-(c.door?90:30)*6e4),eta:new Date(arr.getTime()+(c.door?90:0)*6e4),price:c.p+s[2],i}}).filter(b=>b.pick>new Date(Date.now()+30*6e4));
+S={...c,hrs,ds,buses,sort:'dep'};draw();cmp();$('#results').hidden=false;go('#results')};
+
+document.querySelectorAll('.pill').forEach(b=>b.onclick=()=>{S.sort=b.dataset.s;document.querySelectorAll('.pill').forEach(x=>x.setAttribute('aria-pressed',x===b));draw()});
+
+function draw(){
+$('#rt').textContent=`${S.from} to ${S.to}`;
+$('#rs').textContent=`${S.w} kg, about ${S.d} km, pickup on ${dm(new Date(S.ds+'T00:00:00'))}`;
+if(!S.buses.length){$('#res').innerHTML='<div class="empty">No pickups left on this date. Choose a later date and search again.</div>';return}
+const b=[...S.buses].sort((x,y)=>S.sort==='price'?x.price-y.price:S.sort==='eta'?x.eta-y.eta:x.dep-y.dep);
+$('#res').innerHTML=b.map(x=>`<article class="bus"><div><div style="font-weight:700">${x.op}</div><div class="mute" style="font-size:14px;margin-bottom:6px">${x.tag}</div><div class="tm">${hm(x.dep)}<i></i>${hm(x.arr)}</div><small>${dm(x.dep)} to ${dm(x.arr)}, ${dur(S.hrs)} on the road</small></div><div class="r"><div class="price">${inr(x.price)}</div><button class="pri" data-i="${x.i}">Book parcel</button></div><div><small>${S.door?'Gig worker collects by ':'Drop at the bus stand by '}${hm(x.pick)}</small><span class="ok">${S.door?'Delivered by ':'Ready to collect by '}${dt(x.eta)}</span></div></article>`).join('');
+document.querySelectorAll('.bus .pri').forEach(k=>k.onclick=()=>openB(+k.dataset.i))}
+
+function openB(i){const b=S.buses.find(x=>x.i===i);S.sel=b;
+$('#sm').innerHTML=`<b>${S.from} to ${S.to}</b>, ${S.w} kg<br>${b.op}, departs ${dt(b.dep)}<br>${S.door?'Delivered by ':'Ready to collect by '}${dt(b.eta)}`;
+const g=Math.round(b.price*.18);$('#fl').textContent='Fare, '+(S.door?'with pickup and delivery':'bus stand to bus stand');$('#fr').textContent=inr(b.price);$('#gs').textContent=inr(g);$('#tt').textContent=inr(b.price+g);
+$('#bf').reset();['sa','ra'].forEach(k=>{const e=$('#'+k);e.required=S.door;e.closest('.f').hidden=!S.door});
+$('#s1').hidden=false;$('#s2').hidden=true;$('#bk').showModal()}
+$('#cx').onclick=$('#cl').onclick=()=>$('#bk').close();
+
+$('#bf').onsubmit=e=>{e.preventDefault();const b=S.sel,id='PW'+Math.floor(1e5+Math.random()*9e5);
+BK[id]={id,from:S.from,to:S.to,w:S.w,door:S.door,op:b.op,dep:+b.dep,arr:+b.arr,pick:+b.pick,eta:+b.eta,rn:$('#rn').value.trim(),t:Date.now()};save();
+$('#bid').textContent=id;
+$('#bm').textContent=S.door?`A gig worker will collect the parcel from ${$('#sa').value.trim()} by ${hm(b.pick)}. We will text ${$('#sp').value} with updates.`:`Drop the parcel at the ${S.from} bus stand by ${hm(b.pick)}. The receiver collects it at the ${S.to} bus stand.`;
+$('#s1').hidden=true;$('#s2').hidden=false;$('#gt').onclick=()=>{$('#bk').close();$('#tid').value=id;track(id);go('#track')}};
+
+$('#tf').onsubmit=e=>{e.preventDefault();track($('#tid').value)};
+function track(id){id=(id||'').trim().toUpperCase();const o=$('#tr');clearInterval(timer);const b=BK[id];
+if(!b){o.innerHTML=`<p class="err" style="margin-top:16px;max-width:520px">No parcel found for “${esc(id)}”. Check the ID on your booking confirmation, or book a parcel above.</p>`;return}
+let last=-1;const tick=()=>{const s=Math.min(4,Math.floor((Date.now()-b.t)/4000));if(s===last)return;last=s;
+const st=[['Booked',dt(new Date(b.t))],[b.door?'Picked up by gig worker':'Dropped at bus stand','Due by '+hm(new Date(b.pick))],['On the bus to '+b.to,b.op+', departs '+hm(new Date(b.dep))+', arrives '+dt(new Date(b.arr))],[b.door?'Out for delivery':'Ready to collect','From '+hm(new Date(b.arr))],['Delivered','To '+esc(b.rn)+' by '+dt(new Date(b.eta))]];
+o.innerHTML=`<p style="margin:22px 0 0"><b>${b.id}</b>, ${b.from} to ${b.to}, ${b.w} kg</p><ol class="tl">${st.map((x,i)=>`<li class="${s===4||i<s?'d':i===s?'a':''}"><b>${x[0]}</b>${x[1]}</li>`).join('')}</ol><p class="mute small">Demo tracking: the status moves ahead every few seconds.</p>`;
+if(s===4)clearInterval(timer)};tick();timer=setInterval(tick,1000)}
+
+const rv=[...document.querySelectorAll('.rv')];
+if('IntersectionObserver' in window&&!calm){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});rv.forEach(x=>io.observe(x))}else rv.forEach(x=>x.classList.add('in'));
+const wd=$('#stm');wd.innerHTML=wd.textContent.trim().split(/\s+/).map(w=>`<span>${w}</span>`).join(' ');
+const ws=[...wd.children],land=$('.land'),fill=$('#fill'),stp=[...document.querySelectorAll('#steps li')];
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const nv=$('#nv'),bd=document.body,mbtn=$('.mb');let ly=0;
+function navUpd(){const y=scrollY,vh=innerHeight,d=y-ly;nv.classList.toggle('sc',y>24);
+if(!bd.classList.contains('mo')){if(y<240)nv.classList.remove('hd');else if(d>6)nv.classList.add('hd');else if(d<-6)nv.classList.remove('hd')}
+if(Math.abs(d)>6)ly=y;
+let act='';['how','rates','where','partners','track'].forEach(id=>{const r=document.getElementById(id).getBoundingClientRect();if(r.top<vh*.45&&r.bottom>vh*.45)act=id});
+document.querySelectorAll('.nl a').forEach(a=>a.classList.toggle('cur',a.getAttribute('href')==='#'+act))}
+const menu=o=>{bd.classList.toggle('mo',o);mbtn.setAttribute('aria-expanded',String(o));document.documentElement.style.overflow=o?'hidden':''};
+mbtn.onclick=()=>menu(!bd.classList.contains('mo'));
+document.querySelectorAll('.mn a').forEach(a=>a.onclick=()=>menu(false));
+addEventListener('keydown',e=>{if(e.key==='Escape')menu(false)});
+addEventListener('resize',()=>{if(innerWidth>=900)menu(false)});
+function sc(){navUpd();const vh=innerHeight,y=scrollY,r=wd.getBoundingClientRect(),p=cl((vh*.85-r.top)/(r.height+vh*.35));
+ws.forEach((s,i)=>s.style.opacity=calm?1:.16+.84*cl(p*ws.length*1.15-i));
+const sr=$('#steps').getBoundingClientRect();fill.style.height=cl((vh*.62-sr.top)/sr.height)*100+'%';
+stp.forEach(l=>l.classList.toggle('on',l.getBoundingClientRect().top<vh*.62));
+pg.style.transform=`scaleX(${cl(y/Math.max(1,document.documentElement.scrollHeight-vh))})`;
+if(!calm&&y<vh*1.5)land.style.transform=`translateY(${y*.18}px)`}
+const nums=[...document.querySelectorAll('.num')];
+nums.forEach(n=>{n._t=+n.dataset.to;n._s=n.dataset.s||'';n.textContent=(calm?n._t:0)+n._s});
+function cnt(n){if(calm)return;const t0=performance.now(),f=t=>{const k=Math.min(1,(t-t0)/1600),e=1-Math.pow(1-k,4);n.textContent=Math.round(n._t*e)+n._s;if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+if('IntersectionObserver' in window){const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){cnt(e.target);io2.unobserve(e.target)}}),{threshold:.6});nums.forEach(n=>io2.observe(n))}else nums.forEach(n=>n.textContent=n._t+n._s);
+const pg=$('#pg');let tk=false;addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(()=>{sc();tk=false})}},{passive:true});addEventListener('resize',sc);sc();
+
+const it=$('#intro'),ik=$('#isk'),rest=[...document.body.children].filter(e=>e!==it);
+const lock=o=>{rest.forEach(e=>e.toggleAttribute('inert',o));document.documentElement.classList.toggle('il',o)};
+function openIntro(){it.hidden=false;it.classList.remove('out','play');void it.offsetWidth;it.classList.add('play');lock(true);ik.focus({preventScroll:true})}
+function closeIntro(){if(it.classList.contains('out'))return;it.classList.add('out');lock(false);setTimeout(()=>{if(it.classList.contains('out'))it.hidden=true},900)}
+ik.onclick=closeIntro;$('#ibk').onclick=closeIntro;it.addEventListener('click',e=>{if(e.target===it)closeIntro()});
+$('#replay').onclick=()=>{const h=document.documentElement;h.style.scrollBehavior='auto';scrollTo(0,0);h.style.scrollBehavior='';openIntro()};
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!it.hidden)closeIntro()});
+lock(true);ik.focus({preventScroll:true});
+</script>
+</body>
+</html>
